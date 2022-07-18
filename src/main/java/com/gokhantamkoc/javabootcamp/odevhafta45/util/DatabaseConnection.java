@@ -1,5 +1,6 @@
 package com.gokhantamkoc.javabootcamp.odevhafta45.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
@@ -15,7 +16,7 @@ public class DatabaseConnection {
     private final String PASSWORD = "toor";
 
     private Connection connection = null;
-
+    @Autowired
     public DatabaseConnection() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
