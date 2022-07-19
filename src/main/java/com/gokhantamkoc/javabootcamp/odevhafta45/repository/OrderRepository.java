@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +98,7 @@ public class OrderRepository {
     public List<OrderDetail> getOrderDetails(long orderId) {
         // BU METHODU 2. GOREV ICIN DOLDURUNUZ
         final String SQL =
-                "SELECT id , status,type, order, product, amount, amountType FROM public.order_detail where id = ? ";
+                "SELECT id , status,type, order, product, amount, amountType FROM public.order_detail where order_id = ? ";
         List<OrderDetail> orderDetails = new ArrayList<>();
         try {
             PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(SQL);
@@ -125,8 +124,9 @@ public class OrderRepository {
                         )
                 );
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        }  catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
         }
         return orderDetails;
     }
